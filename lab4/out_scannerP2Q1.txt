@@ -1,0 +1,10 @@
+  BITWISE AND    
+ PLUS       
+AT 
+  
+ MULTIPLY  
+   
+ MINUS   
+
+BITWISE AND  
+ BITWISE OR  
