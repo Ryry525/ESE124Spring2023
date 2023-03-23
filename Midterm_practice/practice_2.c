@@ -24,12 +24,9 @@ int main() {
             count++;
         }
     }
-
-    // close the file
-    fclose(inp);
-
     // print the number of occurrences of "bear"
     printf("Number of occurrences of 'bear': %d\n", count);
-
+    // close the file
+    fclose(inp);
     return 0;
 }
