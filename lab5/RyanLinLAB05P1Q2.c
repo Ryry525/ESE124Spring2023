@@ -14,7 +14,8 @@ int main()
     int realNumber = 0;
     float decimalNumber = 0.0;
     float combinedNumber = 0.0;
-    int expNumber = 0;
+    float exponentNumber = 0.0;
+    float power = 0;
     float negative = 0.0; // if negative = 0, the number is positive
     float sumFloat = 0.0, avgFloat = 0.0;
     int numFloat = 0;
@@ -136,20 +137,21 @@ int main()
                     decimalNumber = decimalNumber + weight*(number[j]-'0');
                     weight *= 0.1;
                     j++;
-                    if (j<strlen(number) && decimalNumber == 'E' || decimalNumber == 'e')
-                    {
-                        j++;
-                            while (j<strlen(number))
-                            {
-                                expNumber = expNumber*10 + (number[j]-'0');
-                                j++;
-                                
-                            }
-                    }
                 }// end of while
                 combinedNumber += decimalNumber;
-                combinedNumber *= pow(10,expNumber);
             }
+            if (j<strlen(number) && (number[j] == 'E' || number[j] == 'e'))
+                {
+                    power = power*10 + (number[j]-'0');
+                    j++;
+                    /* while(j<strlen(number))
+                    {
+                    
+                     
+                    }
+                    */
+                    combinedNumber *= pow(10,power);
+                }
             //time the combined number with pow(10,digits following e)
             
             //time the combined number with pow(0.1,digits following e)
@@ -160,7 +162,6 @@ int main()
             sumFloat += combinedNumber;
             numFloat++; 
             fprintf(outp, "%f\n", combinedNumber);
-            fprintf(outp, "%d\n", expNumber);
         } 
         c = fgetc(inp);
         if (c >= '0' && c <='9');
@@ -173,6 +174,7 @@ int main()
         avgFloat = sumFloat/numFloat;
         fprintf(outp, "Sum of all floats = %f\n", sumFloat);
         fprintf(outp, "Average of all floats = %f\n", avgFloat);
+        fprintf(outp, "%d", power);
     }
     fclose(inp);
     fclose(outp);
