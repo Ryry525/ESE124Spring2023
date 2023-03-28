@@ -4,6 +4,7 @@
         "bitset": "c",
         "chrono": "c",
         "unordered_map": "c",
-        "ratio": "c"
+        "ratio": "c",
+        "stdio.h": "c"
     }
 }
