@@ -1,5 +1,4 @@
 //Ryan Lin SBU ID 114737153
-//Ryan Lin SBU ID 114737153
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,15 +7,15 @@
 
 int main()
 {
-    char number[STR_LENGTH];
+    char number[STR_LENGTH]= "";
     char c;
     int i, j;
     int realNumber = 0;
     float decimalNumber = 0.0;
     float combinedNumber = 0.0;
     float exponentNumber = 0.0;
-    float power = 0;
-    float negative = 0.0; // if negative = 0, the number is positive
+    float power = 10.0, exponent = 0.0, exponent_number = 0.0;
+    float negative = 0.0, exp_negative = 0.0; // if negative = 0, the number is positive
     float sumFloat = 0.0, avgFloat = 0.0;
     int numFloat = 0;
     FILE *inp, *outp;
@@ -39,10 +38,14 @@ int main()
         number[0] = '\0';
 
         if(c == '+')    //recognize sign
-            negative = 0.0;
+        {    negative = 0.0;
+            exp_negative = 0.0;
+        }
         else if(c == '-')
+        {
             negative = 1.0;
-
+            exp_negative = 1.0;
+        }
         else if (c >= '0' && c <= '9')
         {
             i = 0;
@@ -121,6 +124,7 @@ int main()
             realNumber = 0;
             decimalNumber = 0.0;
             combinedNumber = 0.0;
+            exponent_number = 0.0;
             while(number[j] != '.' && j < (strlen(number)))
             {
                 realNumber = realNumber*10 + (number[j] - '0');
@@ -140,24 +144,20 @@ int main()
                 }// end of while
                 combinedNumber += decimalNumber;
             }
-            if (j<strlen(number) && (number[j] == 'E' || number[j] == 'e'))
+            if ((number[j] == 'E' || number[j] == 'e') && j < (strlen(number)))
                 {
-                    power = power*10 + (number[j]-'0');
                     j++;
-                    /* while(j<strlen(number))
-                    {
-                    
-                     
+                    while(j<strlen(number)){
+                    exponent = exponent * 10 + (number[j] - '0');
+                    exponent_number *= pow(power,exponent);
+                    j++;
                     }
-                    */
-                    combinedNumber *= pow(10,power);
                 }
-            //time the combined number with pow(10,digits following e)
-            
-            //time the combined number with pow(0.1,digits following e)
 
             if (negative == 1)
                 combinedNumber *= -1.0; //combinedNumber = combineNumber*-1
+            if (exp_negative == 1)
+                power = 0.1;
             
             sumFloat += combinedNumber;
             numFloat++; 
@@ -174,7 +174,7 @@ int main()
         avgFloat = sumFloat/numFloat;
         fprintf(outp, "Sum of all floats = %f\n", sumFloat);
         fprintf(outp, "Average of all floats = %f\n", avgFloat);
-        fprintf(outp, "%d", power);
+        fprintf(outp, "%f", exponent_number);
     }
     fclose(inp);
     fclose(outp);

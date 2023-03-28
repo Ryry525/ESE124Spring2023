@@ -1,4 +1,7 @@
 45.093201
-Sum of all floats = 45.093201
-Average of all floats = 45.093201
-0
+5.722720
+34.713001
+90.507088
+Sum of all floats = 176.036011
+Average of all floats = 44.009003
+0.000000
