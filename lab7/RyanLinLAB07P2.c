@@ -87,7 +87,7 @@ int main()
     if(oper =='i' || oper =='I')
     {
         //shift down
-        for(i=data_row-1; i>m-1; i++)
+        for(i=data_row-1; i>m-1; i--)
         {
             j=0;
             for(j=0; j<data_col[i]; j++)
@@ -109,15 +109,16 @@ int main()
             data_col[m-1]=j;
             data_row++;
         }
-    }//end of inset
+    }//end of insert
     }   
     //display
-    for(i=0; i<data_row; i++)
+    for(i=0; i<data_row+1; i++)
     {
         printf("\n%d-->", i+1);
         for(j=0; j<data_col[i]; j++)
             printf(" |%s|\t", textEd[i][j]);
     }
+    
     fclose(inp);
     return 0;
 }
