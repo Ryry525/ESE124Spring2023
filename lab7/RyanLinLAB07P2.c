@@ -55,62 +55,39 @@ int main()
         scanf("%c", &oper);
         getchar();
 
-        if(oper=='i' || oper =='I' || oper == 'd' || oper == 'D' || oper == 'r' || oper == 'R')
-        {
-            printf("Enter a row number m:");
-            scanf("%d", &m);
-            getchar();
-        }
-        if(m <= 0 || m >= MAX_ROWs)
-        {
-            printf("Error: m must be between 1 to %d\n", MAX_ROWs);
-            continue;
-        }
-        if(oper=='d' || oper =='D' || oper == 'r' || oper == 'R')
-        {
-            printf("Enter a row number n:");
-            scanf("%d", &n);
-            getchar();
-        
-        if(n <= 0 || n >= MAX_ROWs)
-            {
-                printf("Error: n must be between 1 to %d\n", MAX_ROWs);
-                continue;
-            }
-        }
-    if(m>n)
-    {
-        printf("Error: m must be less than n.\n");
-        continue;
-    }
+        if (oper >= 'a')
+            oper = oper - 32;
+            
     //insert
-    if(oper =='i' || oper =='I')
-    {
-        //shift down
-        for(i=data_row-1; i>m-1; i--)
+    switch(oper)
+        case 'I': 
         {
-            j=0;
-            for(j=0; j<data_col[i]; j++)
+            //shift down
+            for(i=data_row-1; i>m-1; i--)
             {
-                strcpy(textEd[i+1][j], textEd[i][j]);
-                data_col[i+1] = data_col[i];
+                j=0;
+                for(j=0; j<data_col[i]; j++)
+                {
+                    strcpy(textEd[i+1][j], textEd[i][j]);
+                    data_col[i+1] = data_col[i];
+                }
+                //input the new line
+                printf("Enter the new line:");
+                j=0;
+                while(scanf("%s", word) != EOF)
+                {
+                    strncpy(textEd[m-1][j], word, MAX_WORD_LEN-1);
+                    j++;
+                    c=getchar();
+                    if(c=='\n')
+                        break;
+                }//while
+                data_col[m-1]=j;
+                data_row++;
             }
-            //input the new line
-            printf("Enter the new line:");
-            j=0;
-            while(scanf("%s", word) != EOF)
-            {
-                strncpy(textEd[m-1][j], word, MAX_WORD_LEN-1);
-                j++;
-                c=getchar();
-                if(c=='\n')
-                    break;
-            }//while
-            data_col[m-1]=j;
-            data_row++;
-        }
-    }//end of insert
+        }//end of insert
     }   
+    
     //display
     for(i=0; i<data_row+1; i++)
     {
