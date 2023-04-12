@@ -1,4 +1,4 @@
-//Ryan Lin 114737153
+// Ryan Lin 114737153
 #include <stdio.h>
 #include <string.h>
 #define INITIAL_STATE 0
@@ -19,34 +19,32 @@ int main()
         {STATE_1, STATE_3, STATE_1},
         {STATE_4, STATE_1, STATE_1},
         {STATE_2, STATE_5, STATE_1},
-        {STATE_4, STATE_1, STATE_1}
-    };
+        {STATE_4, STATE_1, STATE_1}};
     int output_Table[NUM_STATES][NUM_INPUTS] = {
         {0, 0, 0},
         {0, 0, 0},
         {0, 0, 0},
         {0, 0, 0},
         {0, 1, 0},
-        {0, 0, 0}
-    };
-    int current_State = 0, output = 0, numOccurences =0, column; 
+        {0, 0, 0}};
+    int current_State = 0, output = 0, numOccurences = 0, column;
     char sequence[64];
     printf("Please enter a character sequence: ");
     scanf("%s", &sequence);
     int i;
-    for (i=0; i < strlen(sequence); i++)
+    for (i = 0; i < strlen(sequence); i++)
     {
-        switch(sequence[i])
+        switch (sequence[i])
         {
-            case 'F':
-                column = 0;
-                break;
-            case 'R':
-                column = 1;
-                break;
-            default:
-                column = 2;
-                break;
+        case 'F':
+            column = 0;
+            break;
+        case 'R':
+            column = 1;
+            break;
+        default:
+            column = 2;
+            break;
         }
         output = output_Table[current_State][column];
         if (output == 1)
