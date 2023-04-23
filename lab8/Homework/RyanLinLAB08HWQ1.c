@@ -1,8 +1,8 @@
+
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #define WORDSIZE 32
 
 char *my_strcat(char *s1, char *s2)
@@ -17,7 +17,6 @@ char *my_strcat(char *s1, char *s2)
 
   return s1;
 }
-
 char *my_strcpy(char *s1, char *s2)
 {
   int i = 0;
@@ -29,60 +28,69 @@ char *my_strcpy(char *s1, char *s2)
   s1[i] = '\0';
   return s1;
 }
-
 // function ToPigLatin
 char *ToPigLatin(char *word)
 {
+  // check if the entered word is a word
   int i = 0;
-  char *result = (char *)malloc(sizeof(char) * 100);
+  char newWord[WORDSIZE];
+  // check if first letter is uppercase or not
   int capital = isupper(word[0]);
-
-  while (word[i] != '\0')
+  if (tolower(word[0]) == 'a' || tolower(word[0]) == 'e' ||
+      tolower(word[0]) == 'i' || tolower(word[0]) == 'o' ||
+      tolower(word[0]) == 'u')
   {
-    if (tolower(word[0]) == 'a' || tolower(word[0]) == 'e' ||
-        tolower(word[0]) == 'i' || tolower(word[0]) == 'o' ||
-        tolower(word[0]) == 'u')
+    my_strcpy(newWord, word);
+    my_strcat(newWord, "way");
+  }
+  else
+  {
+    // fetching index of first occuring vowel in array
+    int i = 0;
+    while (word[i] != '\0')
     {
-      my_strcpy(result, word);
-      my_strcat(result, "way");
-    }
-    else
-    {
-      int j = 0;
-      int k;
-
-      while (tolower(word[j]) != 'a' && tolower(word[j]) != 'e' && tolower(word[j]) != 'i' && tolower(word[j]) != 'o' && tolower(word[j]) != 'u')
+      if (word[i] != 0 && word[i] == 'y' || word[i] == 'Y')
       {
-        result[strlen(result)] = word[j];
-        result[strlen(result) + 1] = '\0';
-        for (k = 0; k < strlen(result); k++)
-        {
-          result[k] = result[k + 1];
-        }
-        j++;
-        if (j != 0 && word[i] == 'y')
-        {
-          break;
-        }
+        break;
       }
-      my_strcat(result, "ay");
+      i++;
     }
+    // storing character from first vowel to word array
+    int j = 0;
+    int k = i;
+    while (word[k] != '\0')
+    {
+      word[j] = word[k];
+      // incrementing counters
+      k++;
+      j++;
+    }
+    // looping from 0 to ith index back, to store initial chars
+    for (k = 0; k < i; k++)
+    {
+      newWord[j] = word[k];
+      j++;
+    }
+    // adding null char at last of word
+    newWord[j] = '\0';
+    // adding ay 
+    my_strcat(word, "ay");
+
   }
-  if (capital != 0)
+    my_strcpy(word, newWord);
+
+    if(capital != 0)
+      word[0] = toupper(word[0]);
+    return word;
+  }
+
+  // main
+  int main()
   {
-    result[0] = toupper(result[0]);
+    char word[WORDSIZE];
+    printf("Enter a word: ");
+    scanf("%s", word);
+
+    // displaying word
+    printf("Output : %s", ToPigLatin(word));
   }
-  return result;
-}
-
-// main
-int main()
-{
-  char word[39];
-  printf("Enter a word: ");
-  getchar();
-  scanf("%s", word);
-
-  // displaying result
-  printf("Output : %s", ToPigLatin(word));
-}
