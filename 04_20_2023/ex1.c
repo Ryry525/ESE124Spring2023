@@ -36,7 +36,7 @@ scanf("%d", &B[i].zip);
 printf("State: ");
 scanf("%s", &B[i].state);
 getchar();
-}
+}   
 for(i=0; i < Nra; i++)
 printf("Address: %d %s %s %d %s\n", B[i].number,B[i].street, B[i].town, B[i].zip, B[i].state);
 }
