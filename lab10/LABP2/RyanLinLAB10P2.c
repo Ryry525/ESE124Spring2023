@@ -1,22 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "my_queue.h"
-int main()
+
+int main(int argc, char *argv[])
 {
     int i,j, row, col;
     char c;
     char arr[8][8];
-    char flags[8][8];
+    char flags[8][8] = {0};
     FILE *inp;
     int x, y;
 
     if((inp = fopen("inputp2.txt", "r")) == NULL)
     {
-        printf("Error: cnnot open the file.\n");
+        printf("Error: cannot open the file.\n");
         exit(1);
     }
- 
     i = j = 0;
     while((c=fgetc(inp)) != EOF)
     {
@@ -29,6 +28,7 @@ int main()
         arr[i][j] = c;
         j++;
     }
+    //print out the map 
     for(row=0; row<8; row++)
     {
         for(col=0; col<8; col++)
@@ -63,22 +63,22 @@ int main()
         Remove();
         flags[x][y] = 2;
 
-        if(x > 0 && arr[x-1][y] != '*' && flags[x-1][y]==0)
+        if(x > 0 && arr[x-1][y] != '*' && flags[x-1][y] == 0)
         {
             Add(x-1, y, ' ');
             flags[x-1][y] = 1;
         }
-        if(y > 0 && arr[x][y-1] != '*' && flags[x][y-1])
+        if(y > 0 && arr[x][y-1] != '*' && flags[x][y-1] == 0)
         {
             Add(x, y-1, ' ');
             flags[x][y-1] = 1;
         }
-        if(x < 7 && arr[x+1][y] != '*' && flags[x+1][y])
+        if(x < 7 && arr[x+1][y] != '*' && flags[x+1][y] == 0)
         {
             Add(x+1, y, ' ');
             flags[x+1][y] = 1;
         }
-        if(y < 7 && arr[x][y+1] != '*' && flags[x][y+1])
+        if(y < 7 && arr[x][y+1] != '*' && flags[x][y+1] == 0)
         {
             Add(x, y+1, ' ');
             flags[x][y+1] = 1;

@@ -8,7 +8,7 @@ float simpleIntegral(float left_limit, float right_limit, int numDpoints)
     float shortside;
     float longside;
     float area;
-    float distance = (right_limit - left_limit / numDpoints);
+    float distance = (right_limit - left_limit) / numDpoints;
     float integralValue = 0.0;
 
     for (int i = 1; i < numDpoints - 1; i++)
@@ -26,25 +26,29 @@ float integral(float left_limit, float right_limit, int numDpoints, float (*pf)(
     float shortside;
     float longside;
     float area;
-    float distance = (right_limit - left_limit / numDpoints);
+    float distance;
     float integralValue = 0.0;
-    for (int i = 1; i < numDpoints - 1; i++)
+    int i;
+
+    distance = (right_limit - left_limit) / numDpoints;
+    for (i = 1; i < numDpoints - 1 ; i++)
     {
-        shortside = pf(left_limit + (i - 1) * distance);
-        longside = pf(left_limit + i * distance);
+        shortside = pf((left_limit + (i - 1) * distance));
+        longside = pf((left_limit + i * distance));
 
         area = (shortside + longside) * distance / 2.0;
+
         integralValue = integralValue + area;
     }
     return integralValue;
 }
-float square(float number)
+float square(float x)
 {
-    return number * number;
+    return x * x;
 }
-float cubic(float number)
+float cubic(float x)
 {
-    return number * number * number;
+    return x * x * x;
 }
 
 int main()
