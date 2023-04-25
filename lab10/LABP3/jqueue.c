@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 
-#define MAX 1000
+#define MAX 41
 
 static int NameID [MAX];
 
@@ -17,24 +17,25 @@ void clear () {
 
 int is_empty () {
 	
-	return (front == end)? 1: 0;
+	 return (front == end);
 }
 
 int is_full () {
 	
-	return (end == MAX)? 1: 0;
+	return ((end + 1) % MAX == front);
 }
 
 
 void add (int Id) {
 	
 	if (is_full()) {
-		printf ("Error: queue is full\n");
+		printf ("\nError: queue is full\n");
 		exit (1);
 	}
 	else {
-	    printf ("added to queue: %d\n", Id);	
-	
+	    printf ("\nadded to queue: %d\n", Id);	
+		
+		//turned normal queue into circular queue 
 		NameID [end] = Id;
 		end = (end + 1) % MAX;
 	}
@@ -48,6 +49,7 @@ int _remove () {
 		exit (1);
 	}
 	else {
+		//turned normal queue into circular queue 
 		temp = NameID [front];
 		front = (front + 1) % MAX;
 		return temp;
