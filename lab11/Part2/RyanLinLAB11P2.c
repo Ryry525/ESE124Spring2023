@@ -162,7 +162,7 @@ void Swap(studentType *s1, studentType *s2)
     s1->age = s2->age;
     s1->GPA = s2->GPA;
 
-    // temp to s2
+    // temp to s2 
     strcpy(s2->firstName, temp.firstName);
     strcpy(s2->lastName, temp.lastName);
     s2->zip = temp.zip;
